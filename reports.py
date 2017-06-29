@@ -3,13 +3,24 @@
 
 
 def count_games(file_name):
+    number_of_games = 0
     with open(file_name, "r") as f:
-        number_of_games = len(f.readlines())
+        tablazat = f.read().strip("\t").split("\n")
+        for line in range(len(tablazat) - 1):
+            tablazat[line] = [splits for splits in tablazat[line].split("\t") if splits is not ""]
+            number_of_games +=1
     return number_of_games
 
 
 def decide(file_name, year):
-    if str(year) in open(file_name).read():
+    contains = 0
+    with open(file_name, "r") as f:
+        tablazat = f.read().strip("\t").split("\n")
+        for line in range(len(tablazat) - 1):
+            tablazat[line] = [splits for splits in tablazat[line].split("\t") if splits is not ""]
+            if str(year) == tablazat[line][2]:
+                contains =+ 1
+    if contains > 0:
         return True
     else:
         return False
@@ -44,7 +55,7 @@ def get_line_number_by_title(file_name, title):
         tablazat = f.read().strip("\t").split("\n")
         for line in range(len(tablazat) - 1):
             tablazat[line] = [splits for splits in tablazat[line].split("\t") if splits is not ""]
-            if title in tablazat[line][0]:
+            if title == tablazat[line][0]:
                 line_number = line + 1
     return line_number
 
@@ -85,6 +96,4 @@ def when_was_top_sold_fps(file_name):
                     most_sold = tablazat[line][1]
                     date_of_relase = int(tablazat[line][2])
     return date_of_relase
-
-
-export_decide("game_stat.txt", "1999")
+count_games("game_stat.txt")

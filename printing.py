@@ -1,11 +1,22 @@
 def print_count_games(file_name):
+    number_of_games = 0
     with open(file_name, "r") as f:
-        number_of_games = len(f.readlines())
+        tablazat = f.read().strip("\t").split("\n")
+        for line in range(len(tablazat) - 1):
+            tablazat[line] = [splits for splits in tablazat[line].split("\t") if splits is not ""]
+            number_of_games +=1
     print(number_of_games)
 
 
 def print_decide(file_name, year):
-    if str(year) in open(file_name).read():
+    contains = 0
+    with open(file_name, "r") as f:
+        tablazat = f.read().strip("\t").split("\n")
+        for line in range(len(tablazat) - 1):
+            tablazat[line] = [splits for splits in tablazat[line].split("\t") if splits is not ""]
+            if str(year) == tablazat[line][2]:
+                contains =+ 1
+    if contains > 0:
         print(True)
     else:
         print(False)
@@ -40,7 +51,7 @@ def print_get_line_number_by_title(file_name, title):
         tablazat = f.read().strip("\t").split("\n")
         for line in range(len(tablazat) - 1):
             tablazat[line] = [splits for splits in tablazat[line].split("\t") if splits is not ""]
-            if title in tablazat[line][0]:
+            if title == tablazat[line][0]:
                 line_number = line + 1
     print(line_number)
 
