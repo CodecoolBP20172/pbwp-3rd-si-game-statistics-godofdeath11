@@ -1,12 +1,13 @@
 #from export import export_decide
 
+
 def count_games(file_name):
     number_of_games = 0
     with open(file_name, "r") as f:
         table = f.read().strip("\t").split("\n")
         for line in range(len(table)):
             table[line] = [splits for splits in table[line].split("\t") if splits is not ""]
-            number_of_games +=1
+            number_of_games += 1
     return number_of_games
 
 
@@ -17,8 +18,8 @@ def decide(file_name, year):
         for line in range(len(table)):
             table[line] = [splits for splits in table[line].split("\t") if splits is not ""]
             if str(year) == table[line][2]:
-                contains =+ 1           
-    if contains > 0: #Ha egyszer is adott hozzá akkor van olyan év
+                contains = + 1
+    if contains > 0:  # Ha egyszer is adott hozzá akkor van olyan év
         return True
     else:
         return False
@@ -32,7 +33,7 @@ def get_latest(file_name):
             table[line] = [splits for splits in table[line].split("\t") if splits is not ""]
             if int(table[line][2]) > int(latest_date):
                 latest_date = table[line][2]
-                game = table[line][0]               #Addig cseréli le amig talál késöbbi évet
+                game = table[line][0]  # Addig cseréli le amig talál késöbbi évet
     return game
 
 
@@ -76,7 +77,7 @@ def get_genres(file_name):
         for line in range(len(table)):
             table[line] = [splits for splits in table[line].split("\t") if splits is not ""]
             list_of_genres.append(table[line][3])
-    set_of_genres = set(list_of_genres)    #eltuntetkuk az ismétlödéseket
+    set_of_genres = set(list_of_genres)  # eltuntetkuk az ismétlödéseket
     list_of_genres = list(set_of_genres)
     list_of_genres.sort(key=str.lower)
     return list_of_genres
@@ -92,7 +93,8 @@ def when_was_top_sold_fps(file_name):
             if table[line][3] == "First-person shooter":
                 if float(table[line][1]) > float(most_sold):
                     most_sold = table[line][1]
-                    date_of_relase = int(table[line][2])  #Addig cseréli amig talál nagyobbat
+                    date_of_relase = int(table[line][2])  # Addig cseréli amig talál nagyobbat
     return date_of_relase
+
 
 count_games("game_stat.txt")
