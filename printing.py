@@ -1,11 +1,6 @@
-def print_count_games(file_name):
-    number_of_games = 0
-    with open(file_name, "r") as f:
-        tablazat = f.read().strip("\t").split("\n")
-        for line in range(len(tablazat) - 1):
-            tablazat[line] = [splits for splits in tablazat[line].split("\t") if splits is not ""]
-            number_of_games +=1
-    print(number_of_games)
+from reports import count_games
+number_of_games = count_games("game_stat.txt")
+print(number_of_games)
 
 
 def print_decide(file_name, year):

@@ -5,6 +5,7 @@ def export_count_games(file_name):
         for line in range(len(tablazat) - 1):
             tablazat[line] = [splits for splits in tablazat[line].split("\t") if splits is not ""]
             number_of_games +=1
+    with open("answers.txt" "a")
         w.write(number_of_games + '\n')
 
 
